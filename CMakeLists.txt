@@ -35,10 +35,6 @@ enable_doxygen(ENABLE_DOXYGEN)
 # allow for static analysis options
 include(${CMAKE_CONFIG_FOLDER}/StaticAnalyzers.cmake)
 
-option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
-option(ENABLE_TESTING "Enable Test Builds" ON)
-option(ENABLE_FUZZING "Enable Fuzzing Builds" OFF)
-
 # Very basic PCH example
 option(ENABLE_PCH "Enable Precompiled Headers" ON)
 if (ENABLE_PCH)
@@ -50,9 +46,6 @@ if (ENABLE_PCH)
             INTERFACE <vector> <string> <map> <utility> <memory> <array> <list> <stack>)
 endif()
 
-include(cmake/Conan.cmake)
-run_conan()
-include(${PROJECT_BINARY_DIR}/conanbuildinfo.cmake)
 
 set(DECK_CODES_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deck_encoder/src")
 set(DECK_CODES_INCLUDE_DIR
@@ -60,5 +53,14 @@ set(DECK_CODES_INCLUDE_DIR
 add_library(deck_encoder STATIC)
 add_subdirectory(deck_encoder)
 
+
+option(ENABLE_TESTING "Enable Test Builds" ON)
+if(ENABLE_TESTING)
+include(cmake/Conan.cmake)
+run_conan()
+include(${PROJECT_BINARY_DIR}/conanbuildinfo.cmake)
+
 enable_testing()
 add_subdirectory(test)
+endif()
+

@@ -1,0 +1,17 @@
+
+#ifndef LORDECKECODER_REGION_H
+#define LORDECKECODER_REGION_H
+
+enum class Region {
+   BILGEWATER = 0,
+   DEMACIA,
+   FRELJORD,
+   IONIA,
+   NOXUS,
+   PILTOVER_ZAUN,
+   SHADOW_ISLES,
+   SHURIMA,
+   TARGON
+};
+
+#endif  // LORDECKECODER_REGION_H

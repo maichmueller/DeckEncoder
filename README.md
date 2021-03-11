@@ -23,3 +23,23 @@ cmake -E make_directory ./build
 cd build
 cmake --build . --config $BUILD_TYPE
 ```
+
+If you want to reference the encoder in CMake, its target name is `deck_encoder`.
+
+
+## Usage
+
+The deck encoder is namespaced and accessible through `DeckCodec::`. One can pass any `std::vector` like container into `encode`, as long as it provides the following interface elements:
+```
+begin()
+end()
+size()
+value_type trait of its contained type
+```
+The contained value must have a public function `code()` returning a type convertible to std::string, and `count()` returning a size_t count of the card. The library provides a class `CardToken`, which can be used instead.
+
+To encode and decode (with the aforementioned `CardToken` classed used - non deducible!) one calls
+```c++
+std::vector<CardToken> deck_from_code = DeckCodec::decode<CardToken>(code);
+std::string deck_code = DeckCodec::encode(deck_container);
+```

@@ -36,9 +36,9 @@ end()
 size()
 value_type trait of its contained type
 ```
-The contained value must have a public function `code()` returning a type convertible to std::string, and `count()` returning a size_t count of the card. The library provides a class `CardToken`, which can be used instead.
+The contained value must have a public function `code()` returning a type convertible to std::string, and `count()` returning a `size_t` count of the card. The library provides a class `CardToken`, which can be used instead.
 
-To encode and decode (with the aforementioned `CardToken` classed used - non deducible!) one calls
+To encode and decode (with the aforementioned `CardToken` class used - non deducible!) one calls
 ```c++
 std::vector<CardToken> deck_from_code = DeckCodec::decode<CardToken>(code);
 std::string deck_code = DeckCodec::encode(deck_container);
